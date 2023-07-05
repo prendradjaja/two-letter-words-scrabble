@@ -1,4 +1,5 @@
 from word_lists import north_america_words, international_words
+import string
 
 word_list = 'north_america'
 # word_list = 'international'
@@ -20,27 +21,22 @@ def is_consonant(letter):
     assert len(letter) == 1
     return letter not in vowels
 
-firsts = sorted(set(x[0] for x in words))
-lasts = sorted(set(x[1] for x in words))
-
 print('All two-letter words grouped by first letter:')
-for first in firsts:
+for first in string.ascii_uppercase:
     group = []
     for word in words:
         if word[0] == first:
             group.append(word)
-    if group:
-        print(f'- {first}:  {" ".join(group)}')
+    print(f'- {first}:  {" ".join(group) or "-"}')
 
 print()
 print('All two-letter words grouped by last letter:')
-for last in lasts:
+for last in string.ascii_uppercase:
     group = []
     for word in words:
         if word[1] == last:
             group.append(word)
-    if group:
-        print(f'- {last}:  {" ".join(group)}')
+    print(f'- {last}:  {" ".join(group) or "-"}')
 
 print()
 vowels_only = [word for word in words if is_vowel(word[0]) and is_vowel(word[1])]
